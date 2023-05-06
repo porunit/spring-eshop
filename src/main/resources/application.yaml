@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    hibernate:
+      ddlAuto: validate
+    showSql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/eshop
+    username: eshopAdmin
+    password: 358000
+  flyway:
+    baselineOnMigrate: true
+server:
+  port: 35664
