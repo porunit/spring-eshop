@@ -43,15 +43,21 @@ public class UserService implements IUserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findFirstByName(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found with name " + username);
+            throw new UsernameNotFoundException("User not found");
         }
+        List<Role> roles = new ArrayList<>();
+        roles.add(user.getRole());
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), getAuthorities(roles));
+    }
 
-        List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority(user.getRole().name()));
-        return new org.springframework.security.core.userdetails.User(
-                user.getName(),
-                user.getPassword(),
-                roles
-        );
+
+    private static List<GrantedAuthority> getAuthorities(List<Role> roles) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.toString()));
+        }
+        return authorities;
     }
 }
+
+

@@ -29,7 +29,7 @@ CREATE TABLE deliveries
 (
     id            serial PRIMARY KEY,
     product_id    BIGINT NOT NULL REFERENCES products (id),
-    delivery_date date   NOT NULL,
+    delivery_date timestamp   NOT NULL,
     product_count int    NOT NULL
 );
 
@@ -56,21 +56,13 @@ CREATE TABLE delivery_products
     product_id  BIGINT REFERENCES products (id)
 );
 
-CREATE TABLE roles
-(
-    id        SERIAL PRIMARY KEY,
-    role_name VARCHAR(20) NOT NULL UNIQUE
-);
 
 CREATE TABLE users
 (
-	id serial PRIMARY KEY,
-	username varchar(20) NOT NULL UNIQUE,
-	role_name varchar(20) NOT NULL,
-	password varchar(16) NOT NULL,
-	email varchar(20) NOT NULL,
-	CONSTRAINT username_unique UNIQUE(username)
+    id        serial PRIMARY KEY,
+    username  varchar(20) NOT NULL UNIQUE,
+    role_name varchar(20),
+    password  text        NOT NULL,
+    email     varchar(20) NOT NULL,
+    CONSTRAINT username_unique UNIQUE (username)
 );
-
-
-
