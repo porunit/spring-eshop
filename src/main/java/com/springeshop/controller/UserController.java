@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -24,15 +26,20 @@ public class UserController {
         model.addAttribute("user", new UserDTO());
         return "user";
     }
-
     @PostMapping("/new")
     public String saveUser(UserDTO userDTO, Model model) {
         if (userService.save(userDTO)) {
-            return "redirect:/users/new";
+            return "redirect:/";
         } else {
             model.addAttribute("user", userDTO);
             return "user";
         }
+    }
+
+    @GetMapping
+    public String userList(Model model){
+        model.addAttribute("users", userService.getAll());
+        return "userList";
     }
 
 }

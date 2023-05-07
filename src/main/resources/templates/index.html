@@ -5,9 +5,8 @@
     <title>Demo</title>
 </head>
 <body>
-<a th:href="@{/users/new}">Users</a>
-<a th:href="@{/logout}" sec:authorize="isAuthenticated()">Log out</a>
-<a th:href="@{/login}" sec:authorize="!isAuthenticated()">Log in</a>
-<span sec:authorize="isAuthenticated()">Hello, <span sec:authentication="name"></span>!</span>
+<div>
+    <div th:insert="~{fragments/menu :: #nav-menu}"></div>
+</div>
 </body>
 </html>

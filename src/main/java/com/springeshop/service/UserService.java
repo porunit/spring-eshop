@@ -5,7 +5,6 @@ import com.springeshop.data.domain.User;
 import com.springeshop.data.dto.UserDTO;
 import com.springeshop.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,13 +14,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
 public class UserService implements IUserService {
-    @Autowired
+
     private final UserRepository userRepository;
-    @Autowired
     private final PasswordEncoder passwordEncoder;
 
     private static List<GrantedAuthority> getAuthorities(List<Role> roles) {
@@ -30,6 +29,10 @@ public class UserService implements IUserService {
             authorities.add(new SimpleGrantedAuthority(role.toString()));
         }
         return authorities;
+    }
+
+    public List<UserDTO> getAll() {
+        return userRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -56,6 +59,13 @@ public class UserService implements IUserService {
         List<Role> roles = new ArrayList<>();
         roles.add(user.getRole());
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), getAuthorities(roles));
+    }
+
+    private UserDTO toDTO(User user) {
+        return UserDTO.builder()
+                .username(user.getName())
+                .email(user.getEmail())
+                .build();
     }
 }
 

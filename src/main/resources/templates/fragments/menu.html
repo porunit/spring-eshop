@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #nav-menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 800px; /* ширина вашего меню */
+      margin: auto;
+    }
+    #nav-menu-left {
+      display: flex;
+      align-items: center;
+    }
+    #nav-menu-left > * + * {
+      margin-left: 20px;
+    }
+    #nav-menu-right {
+      display: flex;
+      align-items: center;
+    }
+    #nav-menu-right > * + * {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+<table id="nav-menu" width="100%">
+  <tr>
+    <td align="center">
+      <table>
+        <tr>
+          <td>Menu -></td>
+          <td><a th:href="@{/}">Home</a></td>
+          <td sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/users}">Users</a></td>
+        </tr>
+      </table>
+    </td>
+    <td align = "right">
+      <a th:href="@{/logout}" sec:authorize="isAuthenticated()">Log out</a>
+      <a th:href="@{/login}" sec:authorize="!isAuthenticated()">Log in</a>
+      <br>
+      <div sec:authorize="isAuthenticated()" style="float: right;">Hello, <span sec:authentication="name"></span>!</div>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
