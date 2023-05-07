@@ -1,4 +1,4 @@
-package com.springeshop.domain;
+package com.springeshop.data.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="manufacturers")
-public class Manufacturer {
-    private static final String SEQ_NAME = "manufacturers_id_seq";
+@Table(name = "users")
+public class User {
+    private static final String SEQ_NAME = "users_id_seq";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
@@ -21,7 +21,17 @@ public class Manufacturer {
     @Column(name = "id")
     private Long id;
 
-    @Column(name="manufacturer_name")
+    @Column(name = "username", unique = true)
     private String name;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "email")
+    private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_name")
+    private Role role;
 
 }

@@ -1,4 +1,4 @@
-package com.springeshop.domain;
+package com.springeshop.data.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
