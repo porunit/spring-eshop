@@ -8,6 +8,6 @@ spring:
     username: eshopAdmin
     password: 358000
   flyway:
-    baselineOnMigrate: true
+    baselineOnMigrate: false
 server:
   port: 35664
