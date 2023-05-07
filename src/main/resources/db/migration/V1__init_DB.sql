@@ -56,3 +56,21 @@ CREATE TABLE delivery_products
     product_id  BIGINT REFERENCES products (id)
 );
 
+CREATE TABLE roles
+(
+    id        SERIAL PRIMARY KEY,
+    role_name VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE users
+(
+	id serial PRIMARY KEY,
+	username varchar(20) NOT NULL UNIQUE,
+	role_name varchar(20) NOT NULL,
+	password varchar(16) NOT NULL,
+	email varchar(20) NOT NULL,
+	CONSTRAINT username_unique UNIQUE(username)
+);
+
+
+
