@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="deliveries")
+@Table(name = "deliveries")
 public class Deliver {
     private static final String SEQ_NAME = "deliveries_id_seq";
 

@@ -24,6 +24,14 @@ public class UserService implements IUserService {
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
+    private static List<GrantedAuthority> getAuthorities(List<Role> roles) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.toString()));
+        }
+        return authorities;
+    }
+
     @Override
     public boolean save(UserDTO userDTO) {
         if (!userDTO.getPassword().equals(userDTO.getMatchingPassword())) {
@@ -48,15 +56,6 @@ public class UserService implements IUserService {
         List<Role> roles = new ArrayList<>();
         roles.add(user.getRole());
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), getAuthorities(roles));
-    }
-
-
-    private static List<GrantedAuthority> getAuthorities(List<Role> roles) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.toString()));
-        }
-        return authorities;
     }
 }
 

@@ -15,19 +15,19 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/new")
-    public String newUser(Model model){
+    public String newUser(Model model) {
         model.addAttribute("user", new UserDTO());
         return "user";
     }
 
     @PostMapping("/new")
-    public String saveUser(UserDTO userDTO, Model model){
-        if(userService.save(userDTO)){
+    public String saveUser(UserDTO userDTO, Model model) {
+        if (userService.save(userDTO)) {
             return "redirect:/users/new";
         } else {
             model.addAttribute("user", userDTO);

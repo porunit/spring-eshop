@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="manufacturers")
+@Table(name = "manufacturers")
 public class Manufacturer {
     private static final String SEQ_NAME = "manufacturers_id_seq";
 
@@ -21,7 +21,7 @@ public class Manufacturer {
     @Column(name = "id")
     private Long id;
 
-    @Column(name="manufacturer_name")
+    @Column(name = "manufacturer_name")
     private String name;
 
 }
