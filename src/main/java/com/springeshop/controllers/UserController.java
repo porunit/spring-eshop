@@ -1,4 +1,4 @@
-package com.springeshop.controller;
+package com.springeshop.controllers;
 
 import com.springeshop.data.dto.UserDTO;
 import com.springeshop.service.UserService;
@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -29,7 +27,7 @@ public class UserController {
     @PostMapping("/new")
     public String saveUser(UserDTO userDTO, Model model) {
         if (userService.save(userDTO)) {
-            return "redirect:/";
+            return "redirect:/users";
         } else {
             model.addAttribute("user", userDTO);
             return "user";
@@ -39,7 +37,7 @@ public class UserController {
     @GetMapping
     public String userList(Model model){
         model.addAttribute("users", userService.getAll());
-        return "userList";
+        return "user-list";
     }
 
 }

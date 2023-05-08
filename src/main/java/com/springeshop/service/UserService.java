@@ -3,7 +3,8 @@ package com.springeshop.service;
 import com.springeshop.data.domain.Role;
 import com.springeshop.data.domain.User;
 import com.springeshop.data.dto.UserDTO;
-import com.springeshop.repository.UserRepository;
+import com.springeshop.exceptions.PasswordNotEqualsException;
+import com.springeshop.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,7 +39,7 @@ public class UserService implements IUserService {
     @Override
     public boolean save(UserDTO userDTO) {
         if (!userDTO.getPassword().equals(userDTO.getMatchingPassword())) {
-            throw new RuntimeException("Password is not equals");
+            throw new PasswordNotEqualsException("Password is not equals");
         }
         User user = User.builder()
                 .name(userDTO.getUsername())
