@@ -1,4 +1,4 @@
-package com.springeshop.component;
+package com.springeshop.components;
 
 import com.springeshop.service.JwtService;
 import jakarta.servlet.FilterChain;
