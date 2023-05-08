@@ -1,4 +1,24 @@
 # spring-eshop
-Spring-Eshop repository is a study e-commerce application built using Spring, Hibernate, Security, PostgreSQL, REST API, Boot, and Flyway for data migration. It enables users to browse and purchase car parts and accessories. With a powerful back-end and an intuitive user interface, Spring-Eshop is the perfect platform for show some of my skills 
-##DB model
-![Image alt](https://github.com/porunit/spring-eshop/master/image.png)
+Spring-Eshop repository is a study full-stack e-commerce application built using:
+### Back-End
+<ul>
+<li>REST API</li>
+<li>Spring</li>
+<li>Spring Security </li> 
+<li>Spring Boot</li>
+<li>Spring MVC</li>
+<li>Hibernate</li>
+<li>PostgreSQL</li>
+<li>Flyway for data migration</li>
+</ul>
+
+### Front-End
+<ul>
+<li>JavaScript</li>
+<li>CSS</li>
+<li>ThymeLeaf</li>
+<li>HTML</li>
+</ul>
+
+## DB model
+![Image alt](infological_model.png)
