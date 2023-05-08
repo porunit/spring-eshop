@@ -29,7 +29,7 @@ CREATE TABLE deliveries
 (
     id            serial PRIMARY KEY,
     product_id    BIGINT NOT NULL REFERENCES products (id),
-    delivery_date timestamp   NOT NULL,
+    delivery_date date   NOT NULL,
     product_count int    NOT NULL
 );
 
