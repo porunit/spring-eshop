@@ -27,9 +27,13 @@ public class Product {
     @Column(name = "product_name")
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private List<Deliver> deliveries;
