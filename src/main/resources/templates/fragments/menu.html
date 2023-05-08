@@ -5,12 +5,12 @@
   <title>Title</title>
   <style>
     #nav-menu {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      max-width: 800px; /* ширина вашего меню */
-      margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 800px;
+        margin: auto;
     }
     #nav-menu-left {
       display: flex;
@@ -36,6 +36,7 @@
         <tr>
           <td>Menu -></td>
           <td><a th:href="@{/}">Home</a></td>
+            <td><a th:href="@{/products}">Products</a></td>
           <td sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/users}">Users</a></td>
         </tr>
       </table>

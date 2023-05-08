@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Products list</title>
+    <link href="/static/css/user-list.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Manufacturer</th>
+        <th>Category</th>
+        <th>Price</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}">Testname</td>
+        <td th:text="${product.manufacturer}">Testmail</td>
+        <td th:text="${product.category != null ? product.category : 'N/A'}">Testcat</td>
+        <td th:text="${product.price}">Testprice</td>
+    </tr>
+</table>
+<a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/products/new}">
+    <button>Add new</button>
+</a>
+</body>
+</html>
