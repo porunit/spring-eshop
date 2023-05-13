@@ -15,8 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "purchases")
-public class Purchase {
+@Table(name = "buckets")
+public class Bucket {
     private static final String SEQ_NAME = "purchases_id_seq";
 
     @Id
@@ -25,10 +25,7 @@ public class Purchase {
     @Column(name = "id")
     private Long id;
 
-    @CreationTimestamp
-    @Column(name = "purchase_date")
-    private LocalDateTime created;
 
-    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bucket", cascade = CascadeType.ALL)
     private List<PurchasedItem> purchasedItems;
 }

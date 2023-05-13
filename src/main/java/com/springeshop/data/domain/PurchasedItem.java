@@ -23,8 +23,8 @@ public class PurchasedItem {
 
 
     @ManyToOne
-    @JoinColumn(name = "purchase_id")
-    private Purchase purchase;
+    @JoinColumn(name = "bucket_id")
+    private Bucket bucket;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
