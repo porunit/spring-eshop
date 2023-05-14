@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ManufacturerRepository extends JpaRepository<Manufacturer, Long> {
-
     Manufacturer findFirstByName(String name);
 }
