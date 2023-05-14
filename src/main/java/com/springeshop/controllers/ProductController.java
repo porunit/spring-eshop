@@ -32,11 +32,7 @@ public class ProductController {
 
     @PostMapping("/new")
     public String saveProduct(ProductDTO productDTO, Model model) {
-        if (productService.save(productDTO)) {
-            return "redirect:/products";
-        } else {
-            model.addAttribute("product", productDTO);
-            return "product-list";
-        }
+        productService.save(productDTO);
+        return "redirect:/products";
     }
 }
