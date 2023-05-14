@@ -3,18 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Products list</title>
+  <link href="/static/css/user-list.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div th:insert="~{fragments/menu :: #nav-menu}"></div>
-<table>
+<table class="table">
   <tr>
     <th>Product Name</th>
     <th>Price</th>
   </tr>
   <tr th:each="item : ${bucket}">
-    <td th:text="${item.name}"></td>
-    <td th:text="${item.price}"></td>
+    <td th:text="${item.product.name}"></td>
+    <td th:text="${item.product.price}"></td>
+    <td>
+      <form th:action="@{/bucket/delete/{itemId}(itemId=${item.id})}" method="post">
+        <button type="submit">Remove</button>
+      </form>
+    </td>
   </tr>
 </table>
+
 </body>
 </html>
