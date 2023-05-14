@@ -25,6 +25,9 @@ public class Bucket {
     @Column(name = "id")
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     @OneToMany(mappedBy = "bucket", cascade = CascadeType.ALL)
     private List<PurchasedItem> purchasedItems;

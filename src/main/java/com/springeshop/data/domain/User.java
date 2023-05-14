@@ -35,4 +35,7 @@ public class User {
     @Column(name = "role_name")
     private Role role;
 
+    @OneToOne
+    @JoinColumn(name = "bucket_id")
+    private Bucket bucket;
 }
