@@ -19,6 +19,7 @@ public interface ProductMapper {
     @Mapping(target = "category", source = "category", qualifiedByName = "mapStringToCategory")
     Product toProduct(ProductDTO dto);
 
+    @Mapping(target = "id", ignore = true)
     @Named("mapStringToManufacturer")
     default Manufacturer mapManufacturer(String value) {
         return Manufacturer.builder().name(value).build();
