@@ -9,6 +9,5 @@ spring:
     password: 358000
   flyway:
     baselineOnMigrate: true
-    out-of-order: true
 server:
   port: 35664
