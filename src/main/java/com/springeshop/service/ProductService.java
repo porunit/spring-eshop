@@ -28,7 +28,7 @@ public class ProductService {
         return productMapper.toProductDTOList(productRepository.findAll());
     }
 
-    public boolean save(ProductDTO productDTO) {
+    public void save(ProductDTO productDTO) {
         Manufacturer manufacturer = manufacturerRepository.findFirstByName(productDTO.getManufacturer());
         if (manufacturer == null) {
             throw new ManufacturerNotFoundException("Manufacturer with name: " +
@@ -46,6 +46,5 @@ public class ProductService {
                 .category(category)
                 .build();
         productRepository.save(product);
-        return true;
     }
 }

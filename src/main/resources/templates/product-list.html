@@ -13,12 +13,18 @@
         <th>Manufacturer</th>
         <th>Category</th>
         <th>Price</th>
+        <th>Action</th>
     </tr>
     <tr th:each="product : ${products}">
         <td th:text="${product.name}">Testname</td>
         <td th:text="${product.manufacturer}">Testmail</td>
         <td th:text="${product.category != null ? product.category : 'N/A'}">Testcat</td>
         <td th:text="${product.price}">Testprice</td>
+        <td>
+            <form th:action="@{/bucket/{productId}(productId=${product.id})}" method="post">
+                <input type="submit" value="Add to bucket"/>
+            </form>
+        </td>
     </tr>
 </table>
 <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/products/new}">
