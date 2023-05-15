@@ -47,4 +47,12 @@ public class ProductService {
                 .build();
         productRepository.save(product);
     }
+
+    public List<ProductDTO> searchProducts(String searchTerm) {
+        List<ProductDTO> dtoList = productMapper.toProductDTOList(productRepository.findAllByNameIsContaining(searchTerm));
+        if (dtoList.isEmpty()) {
+            dtoList = productMapper.toProductDTOList(productRepository.findBySearchTermFuzzy(searchTerm));
+        }
+        return dtoList;
+    }
 }
