@@ -21,7 +21,6 @@ public class PurchasedItem {
     @Column(name = "id")
     private Long id;
 
-
     @ManyToOne
     @JoinColumn(name = "bucket_id")
     private Bucket bucket;
@@ -29,4 +28,7 @@ public class PurchasedItem {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @JoinColumn(name = "amount")
+    private int amount;
 }
