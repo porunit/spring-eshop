@@ -51,7 +51,7 @@ public class ProductService {
     public List<ProductDTO> searchProducts(String searchTerm) {
         List<ProductDTO> dtoList = productMapper.toProductDTOList(productRepository.findAllByNameIsContaining(searchTerm));
         if (dtoList.isEmpty()) {
-            dtoList = productMapper.toProductDTOList(productRepository.findBySearchTermFuzzy(searchTerm));
+            dtoList = productMapper.toProductDTOList(productRepository.findBySearchTermFuzzy(searchTerm,5));
         }
         return dtoList;
     }
