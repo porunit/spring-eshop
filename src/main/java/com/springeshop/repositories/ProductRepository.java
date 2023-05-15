@@ -15,8 +15,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @NonNull
     List<Product> findAll();
 
-    @Query(value = "SELECT p FROM Product p WHERE p.name ILIKE %:searchTerm% OR p.manufacturer.name ILIKE %:searchTerm% OR p.category.name ILIKE %:searchTerm%")
-    List<Product> findBySearchTermFuzzy(@Param("searchTerm") String searchTerm);
+    @Query(value = "SELECT p FROM Product p WHERE " +
+            "p.name ILIKE %:searchTerm% OR " +
+            "p.manufacturer.name ILIKE %:searchTerm% OR " +
+            "p.category.name ILIKE %:searchTerm% OR " +
+            "levenshtein(p.name, :searchTerm) <= :maxDistance OR " +
+            "levenshtein(p.category.name, :searchTerm) <= :maxDistance OR " +
+            "levenshtein(p.manufacturer.name, :searchTerm) <= :maxDistance")
+    List<Product> findBySearchTermFuzzy(
+            @Param("searchTerm") String searchTerm,
+            @Param("maxDistance") int maxDistance);
 
     List<Product> findAllByNameIsContaining(String name);
 }
