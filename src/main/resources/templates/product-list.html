@@ -7,6 +7,10 @@
 </head>
 <body>
 <div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<form method="get" action="/products/search">
+    <input type="text" name="searchTerm" placeholder="Search...">
+    <button type="submit">Search</button>
+</form>
 <table class="table">
     <tr>
         <th>Name</th>
