@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +29,8 @@ public class BucketService {
     public void addItemToBucket(Long productId, String username) {
         User user = userRepository.findFirstByName(username);
         if (user != null) {
-            Product product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product not found"));
+            Product product = productRepository.findById(productId)
+                    .orElseThrow(() -> new ProductNotFoundException("Product not found"));
             Bucket bucket = user.getBucket();
             if (bucket == null) {
                 bucket = new Bucket();
@@ -38,10 +40,22 @@ public class BucketService {
             List<PurchasedItem> purchasedItems = bucket.getPurchasedItems();
             if (purchasedItems == null) {
                 purchasedItems = new ArrayList<>();
+            } else {
+                Optional<PurchasedItem> existingItem = purchasedItems.stream()
+                        .filter(item -> item.getProduct().getId().equals(productId))
+                        .findFirst();
+                if (existingItem.isPresent()) {
+                    PurchasedItem item = existingItem.get();
+                    int newQuantity = item.getAmount() + 1;
+                    item.setAmount(newQuantity);
+                    bucketRepository.save(bucket);
+                    return;
+                }
             }
             PurchasedItem purchasedItem = new PurchasedItem();
             purchasedItem.setBucket(bucket);
             purchasedItem.setProduct(product);
+            purchasedItem.setAmount(1);
             purchasedItems.add(purchasedItem);
             bucket.setPurchasedItems(purchasedItems);
             bucketRepository.save(bucket);
@@ -49,7 +63,17 @@ public class BucketService {
     }
 
     public void removeItemFromBucket(Long itemId) {
-        purchasedItemRepository.deleteById(itemId);
+        Optional<PurchasedItem> itemOptional = purchasedItemRepository.findById(itemId);
+        if (itemOptional.isPresent()) {
+            PurchasedItem item = itemOptional.get();
+            int currentQuantity = item.getAmount();
+            if (currentQuantity > 1) {
+                item.setAmount(currentQuantity - 1);
+                purchasedItemRepository.save(item);
+            } else {
+                purchasedItemRepository.deleteById(itemId);
+            }
+        }
     }
 
     public List<PurchasedItem> getAll(String username) {
