@@ -11,12 +11,4 @@ Spring-Eshop repository is a study full-stack e-commerce application built using
 <li>Flyway for data migration</li>
 </ul>
 
-### Front-End
-<ul>
-<li>JavaScript</li>
-<li>CSS</li>
-<li>ThymeLeaf</li>
-<li>HTML</li>
-</ul>
-
 
