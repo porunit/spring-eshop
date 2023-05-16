@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:insert="~{fragments/menu :: #nav-menu}"></div>
-<form th:action="@{/users/new}" th:object="${user}" method="post">
+<form th:action="@{/user/new}" th:object="${user}" method="post">
   <table>
     <tr>
       <td>name</td>
@@ -33,7 +33,7 @@
       </label></td>
     </tr>
   </table>
-  <button type="submit">Save</button>
+  <button type="submit">Sign up</button>
 </form>
 </body>
 </html>

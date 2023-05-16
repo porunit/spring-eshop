@@ -5,7 +5,6 @@ import com.springeshop.data.domain.Product;
 import com.springeshop.data.domain.PurchasedItem;
 import com.springeshop.data.domain.User;
 import com.springeshop.exceptions.ProductNotFoundException;
-import com.springeshop.mappers.ProductMapper;
 import com.springeshop.repositories.BucketRepository;
 import com.springeshop.repositories.ProductRepository;
 import com.springeshop.repositories.PurchasedItemRepository;
@@ -24,7 +23,6 @@ public class BucketService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final PurchasedItemRepository purchasedItemRepository;
-    private final ProductMapper productMapper = ProductMapper.MAPPER;
 
     public void addItemToBucket(Long productId, String username) {
         User user = userRepository.findFirstByName(username);

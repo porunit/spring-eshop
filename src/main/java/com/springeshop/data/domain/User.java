@@ -1,6 +1,5 @@
 package com.springeshop.data.domain;
 
-import com.springeshop.data.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

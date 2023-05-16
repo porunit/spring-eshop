@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findFirstByName(String name);
-
     @Override
     @NonNull
     List<User> findAll();
