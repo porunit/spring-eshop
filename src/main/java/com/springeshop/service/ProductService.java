@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,8 +52,16 @@ public class ProductService {
     public List<ProductDTO> searchProducts(String searchTerm) {
         List<ProductDTO> dtoList = productMapper.toProductDTOList(productRepository.findAllByNameIsContaining(searchTerm));
         if (dtoList.isEmpty()) {
-            dtoList = productMapper.toProductDTOList(productRepository.findBySearchTermFuzzy(searchTerm,5));
+            dtoList = productMapper.toProductDTOList(productRepository.findBySearchTermFuzzy(searchTerm, 3));
         }
         return dtoList;
+    }
+
+    public List<ProductDTO> filterProductOnCategory(String category) {
+        return productMapper.toProductDTOList(productRepository.findAllByCategoryName(category));
+    }
+
+    public List<String> getAllCategories() {
+        return categoryRepository.findAll().stream().map(Category::getName).collect(Collectors.toList());
     }
 }

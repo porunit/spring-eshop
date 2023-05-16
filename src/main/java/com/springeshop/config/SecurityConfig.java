@@ -32,7 +32,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/users").hasAnyAuthority(Role.ADMIN.name())
+                .requestMatchers("/user/list").hasAnyAuthority(Role.ADMIN.name())
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

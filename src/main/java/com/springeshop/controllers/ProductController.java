@@ -5,10 +5,7 @@ import com.springeshop.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +18,9 @@ public class ProductController {
     @GetMapping
     public String productList(Model model) {
         List<ProductDTO> productDTOs = productService.getAll();
+        List<String> categoriesNames = productService.getAllCategories();
         model.addAttribute("products", productDTOs);
+        model.addAttribute("categories", categoriesNames);
         return "product-list";
     }
 
@@ -32,7 +31,7 @@ public class ProductController {
     }
 
     @PostMapping("/new")
-    public String saveProduct(ProductDTO productDTO, Model model) {
+    public String saveProduct(ProductDTO productDTO) {
         productService.save(productDTO);
         return "redirect:/products";
     }
@@ -40,6 +39,13 @@ public class ProductController {
     @GetMapping("/search")
     public String searchProducts(@RequestParam("searchTerm") String searchTerm, Model model) {
         List<ProductDTO> products = productService.searchProducts(searchTerm);
+        model.addAttribute("products", products);
+        return "product-list";
+    }
+
+    @GetMapping("/{category}")
+    public String filterProductsOnCategory(@PathVariable String category, Model model){
+        List<ProductDTO> products = productService.filterProductOnCategory(category);
         model.addAttribute("products", products);
         return "product-list";
     }

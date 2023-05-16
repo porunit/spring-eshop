@@ -1,5 +1,6 @@
 package com.springeshop.repositories;
 
+import com.springeshop.data.domain.Category;
 import com.springeshop.data.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +28,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("maxDistance") int maxDistance);
 
     List<Product> findAllByNameIsContaining(String name);
+
+    List<Product> findAllByCategoryName(String category);
 }

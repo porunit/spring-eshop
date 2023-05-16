@@ -42,13 +42,14 @@
                     <td><a th:href="@{/}">Home</a></td>
                     <td><a th:href="@{/products}">Products</a></td>
                     <td><a th:href="@{/bucket}">Bucket</a></td>
-                    <td sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/users}">Users</a></td>
+                    <td sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/user/list}">Users</a></td>
                 </tr>
             </table>
         </td>
         <td align="right">
             <a th:href="@{/logout}" sec:authorize="isAuthenticated()">Log out</a>
             <a th:href="@{/login}" sec:authorize="!isAuthenticated()">Log in</a>
+            <a th:href="@{/user/new}" sec:authorize="!isAuthenticated()">Sign up</a>
             <br>
             <div sec:authorize="isAuthenticated()" style="float: right;">Hello, <span sec:authentication="name"></span>!
             </div>

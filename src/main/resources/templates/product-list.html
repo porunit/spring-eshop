@@ -11,6 +11,11 @@
     <input type="text" name="searchTerm" placeholder="Search...">
     <button type="submit">Search</button>
 </form>
+<div>
+    <a th:each="category : ${categories}" th:href="@{/products/{category}(category=${category})}">
+        <button th:text="${category}"></button>
+    </a>
+</div>
 <table class="table">
     <tr>
         <th>Name</th>
